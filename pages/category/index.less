@@ -6,8 +6,8 @@ page{
 .cates{
   height: 100%;
   .cates_container{
-    // less 中使用 calc() 要注意
-    height: ~'calc(100vh-90rpx)';
+    // less 中使用 calc() 要注意 ~'cal( 100vh - 90rpx )'  要有空格 ~'calc(100vh-90rpx)' 这样会出错
+    height: ~'calc( 100vh - 90rpx )';
     display: flex;
     .left_menu{
       // 子项过渡 100 % 
