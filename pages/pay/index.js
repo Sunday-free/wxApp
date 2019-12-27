@@ -32,29 +32,71 @@ Page({
     onShow() {
         // 1 获取缓存中的收货地址信息
         const address = wx.getStorageSync("address");
-        // 1 获取缓存中的购物车数据
-        let cart = wx.getStorageSync("cart") || [];
-        // 过滤后的购物车数组
-        cart = cart.filter(v => v.checked);
-        this.setData({ address });
 
-        // 1 总价格 总数量
+        //从页面栈获取 options
+        let pages = getCurrentPages()
+        let currentPage = pages[pages.length - 1]
+        let options = currentPage.options
+        let { id } = options
+
+        let cart = []
+        // 总价格 总数量
         let totalPrice = 0;
         let totalNum = 0;
-        cart.forEach(v => {
-            totalPrice += v.num * v.goods_price;
-            totalNum += v.num;
-        })
+
+        //  获取缓存中的购物车数据
+        // 判断是从购物车还是点击立即购买 跳转的 
+        if (id == 1) {
+            // id = 1 是从 商品详情 跳转过来的
+            cart = wx.getStorageSync("purchase") || [];
+            totalPrice = cart[0].goods_price;
+            totalNum = 1;
+        } else if (id == 0) {
+            // id = 0 是从购物车跳转过来的
+            cart = wx.getStorageSync("cart") || [];
+            // 过滤后的购物车数组
+            cart = cart.filter(v => v.checked);
+            cart.forEach(v => {
+                totalPrice += v.num * v.goods_price;
+                totalNum += v.num;
+            })
+        }
         this.setData({
             cart,
-            totalPrice, totalNum,
+            totalPrice,
+            totalNum,
             address
         });
+    },
+    /* 点击 收货地址  */
+    async handleChooseAddress() {
+        try {
+            // 1.获取权限状态
+            const res1 = await getSetting()
+            const scopeAddress = res1.authSetting["scope.address"]
+            // 2.判断 权限状态
+            if (scopeAddress === false) {
+                // 3.先让用户打开 获取权限
+                await openSetting()
+            }
+            // 4.调用获取收获地址的 api
+            const address = await chooseAddress()
+            // 5.存到缓存
+            wx.setStorageSync('address', address)
+
+        } catch (error) {
+            console.log(error);
+        }
     },
     // 点击 支付 
     async handleOrderPay() {
         try {
-
+            const address = wx.getStorageSync('address')
+            // 判断是否有收货地址
+            if (!address.userName) {
+                await showToast({ title: "没有选收货地址" })
+                return;
+            }
             // 1 判断缓存中有没有token 
             const token = wx.getStorageSync("token");
             // 2 判断
@@ -102,8 +144,6 @@ Page({
             console.log(error);
         }
     }
-
-
 })
 
 

@@ -28,11 +28,6 @@ Page({
                 id: 2,
                 value: "店铺收藏",
                 isActive: false
-            },
-            {
-                id: 3,
-                value: "浏览足迹",
-                isActive: false
             }
         ],
         collect: []

@@ -42,7 +42,7 @@ Page({
         clearTimeout(this.TimeId)
         this.TimeId = setTimeout(() => {
             this.querySearch(value)
-        }, 1000);
+        }, 300);
     },
 
     /* 发送请求获取数据 */

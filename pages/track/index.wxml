@@ -1,0 +1,21 @@
+<!-- 浏览足迹内容 -->
+<view class="track_content">
+  <view class="track_title">我的足迹</view>
+  <view class="track_main">
+    <navigator class="track_item" wx:for="{{track}}" wx:key="goods_id"
+      url="/pages/goods_detail/index?goods_id={{item.goods_id}}">
+      <navigator class="track_img_wrap">
+        <image mode="widthFix" src="{{item.goods_small_logo}}"></image>
+      </navigator>
+      <view class="track_info_wrap">
+        <view class="goods_name">{{item.goods_name}}</view>
+        <view class="goods_price_wrap">
+          <view class="goods_price">￥{{item.goods_price}}</view>
+          <view class="track_num_tool">
+            <view class="goods_num">{{item.num}}</view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+</view>

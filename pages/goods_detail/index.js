@@ -35,11 +35,23 @@ Page({
 
         const { goods_id } = options
         this.getGoodsDetail(goods_id)
-
     },
 
     async getGoodsDetail(goods_id) {
         const goodsObj = await request({ url: "/goods/detail", data: { goods_id } });
+        // 存下goods_id 放在 缓存中 做 浏览足迹
+        let track = wx.getStorageSync('track') || []
+        // // 先判断 足迹 是否已经有了该商品 
+        let index = track.findIndex(v => v.goods_id === goodsObj.goods_id)
+        if (index !== -1) {
+            // 有则 把他 先删了
+            track.splice(index, 1)
+        }
+        //  追加到数组最前面
+        track.unshift(goodsObj)
+        // 保存到 缓存
+        wx.setStorageSync('track', track)
+
         this.GoodsInfo = goodsObj
         // 获取缓存中 商品 收藏的数组
         let collect = wx.getStorageSync('collect') || []
@@ -116,5 +128,14 @@ Page({
         // 保存到data和缓存
         this.setData({ isCollect })
         wx.setStorageSync('collect', collect)
+    },
+    /* 点击立即购买 */
+    async handlePay() {
+        // 先把 该商品数据保存到 缓存中 然后再 跳转
+        wx.setStorageSync('purchase', [this.GoodsInfo])
+        // 跳转到支付页面
+        wx.navigateTo({
+            url: '/pages/pay/index?id=1'
+        })
     }
 })

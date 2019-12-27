@@ -1,0 +1,7 @@
+.aboutus_content{
+  padding: 20rpx;
+}
+.about_text{
+    font-size: 120rpx;
+    color: var(--themeColor);
+}

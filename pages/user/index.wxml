@@ -15,7 +15,7 @@
   <view class="user_main">
     <!-- 历史足迹 -->
     <view class="history_wrap">
-      <navigator>
+      <navigator url="/pages/collect/index">
         <view class="his_num">0</view>
         <view class="his_name">收藏的店铺</view>
       </navigator>
@@ -23,12 +23,12 @@
         <view class="his_num">{{collectNum}}</view>
         <view class="his_name">收藏的商品</view>
       </navigator>
-      <navigator>
+      <navigator url="/pages/collect/index">
         <view class="his_num">0</view>
         <view class="his_name">关注的商品</view>
       </navigator>
-      <navigator>
-        <view class="his_num">0</view>
+      <navigator url="/pages/track/index">
+        <view class="his_num">{{trackNum}}</view>
         <view class="his_name">我的足迹</view>
       </navigator>
     </view>
@@ -55,9 +55,9 @@
       </view>
     </view>
     <!-- 收货地址管理 -->
-    <view class="address_wrap">
+    <navigator url="/pages/address/index" class="address_wrap">
       收货地址管理
-    </view>
+    </navigator>
     <!-- 应用信息相关 -->
     <view class="app_info_wrap">
       <view class="app_info_item app_info_contact">
@@ -65,11 +65,12 @@
         <text>400-618-4000</text>
       </view>
       <navigator url="/pages/feedback/index" class="app_info_item">意见反馈</navigator>
-      <view class="app_info_item">关于我们</view>
+      <navigator url="/pages/aboutus/index" class="app_info_item">关于我们</navigator>
     </view>
     <!-- 推荐 -->
     <view class="recommend_wrap">
       把应用推荐给其他人
+      <button open-type="share"></button>
     </view>
   </view>
 </view>

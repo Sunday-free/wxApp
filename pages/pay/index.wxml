@@ -1,6 +1,11 @@
 <!-- 收货地址 -->
 <view class="recieve_address_row">
-  <view class="user_info_row">
+  <!-- 当收货地址不存在的时候 按钮显示  -->
+  <view class="address_btn" wx:if="{{!address.userName}}">
+    <button bindtap="handleChooseAddress" type="primary" plain>获取收货地址</button>
+  </view>
+  <!-- 当收货地址 存在 详细信息就显示 -->
+  <view wx:else class="user_info_row">
     <view class="user_info">
       <view>{{address.userName}}</view>
       <view>{{address.provinceName+address.cityName+address.countyName+address.detailInfo}}</view>
@@ -11,7 +16,6 @@
 
 <!-- 购物车内容 -->
 <view class="cart_content">
-  <view class="cart_title">购物车</view>
   <view class="cart_main">
     <view class="cart_item" wx:for="{{cart}}" wx:key="goods_id">
       <navigator class="cart_img_wrap">
@@ -20,7 +24,7 @@
       <view class="cart_info_wrap">
         <view class="goods_name">{{item.goods_name}}</view>
         <view class="goods_price_wrap">
-          <view class="goods_price">￥{{item.goods_proce}}</view>
+          <view class="goods_price">￥{{item.goods_price}}</view>
           <view class="cart_num_tool">
             <view class="goods_num">{{item.num}}</view>
           </view>

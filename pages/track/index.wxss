@@ -1,0 +1,52 @@
+.track_content .track_title {
+  padding: 20rpx;
+  font-size: 36rpx;
+  color: var(--themeColor);
+  border-top: 1rpx solid currentColor;
+  border-bottom: 1rpx solid currentColor;
+}
+.track_content .track_main .track_item {
+  display: flex;
+  padding: 10rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+.track_content .track_main .track_img_wrap {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.track_content .track_main .track_img_wrap image {
+  width: 80%;
+}
+.track_content .track_main .track_info_wrap {
+  flex: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.track_content .track_main .track_info_wrap .goods_name {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: #666;
+}
+.track_content .track_main .track_info_wrap .goods_price_wrap {
+  display: flex;
+  justify-content: space-between;
+}
+.track_content .track_main .track_info_wrap .goods_price_wrap .goods_price {
+  color: var(--themeColor);
+  font-size: 34rpx;
+}
+.track_content .track_main .track_info_wrap .goods_price_wrap .track_num_tool {
+  display: flex;
+}
+.track_content .track_main .track_info_wrap .goods_price_wrap .track_num_tool .goods_num {
+  width: 55rpx;
+  height: 55rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

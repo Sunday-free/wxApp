@@ -153,7 +153,7 @@ Page({
         }
         // 跳转到支付页面
         wx.navigateTo({
-            url: '/pages/pay/index'
+            url: '/pages/pay/index?id=0'
         })
     }
 })
